@@ -1,0 +1,55 @@
+<div class="control-section">
+	<ejs-schedule #scheduleObj height="550" width="100%" [eventSettings]="eventData" [group]="group"
+		[selectedDate]="setDate">
+
+		<e-resources>
+			<e-resource field='ConferenceId' title='Attendees' name='Conferences' [allowMultiple]='allowMultiple'
+				[dataSource]='resourceDataSource' textField='Text' idField='Id' colorField='Color'>
+			</e-resource>
+		</e-resources>
+
+		<ng-template #editorTemplate let-data>
+			<table *ngIf="data != undefined" class="custom-event-editor" width="100%" cellpadding="5">
+				<tbody>
+					<tr>
+						<td class="e-textlabel">Summary</td>
+						<td colspan="4">
+							<input id="Subject" class="e-field e-input" type="text" value="{{data.Subject}}" name="Subject"
+                style="width: 100%" />
+            </td>
+					</tr>
+					<tr>
+						<td class="e-textlabel">ConfrenceId</td>
+						<td colspan="4">
+							<ejs-multiselect id='ConferenceId' class="e-field" data-name="ConferenceId"
+								placeholder='Choose Status' [dataSource]='resourceDataSource' [fields]='fields'
+								[value]="check(data)"></ejs-multiselect>
+						</td>
+					</tr>
+					<tr>
+						<td class="e-textlabel">From</td>
+						<td colspan="4">
+							<ejs-datetimepicker id="StartTime" class="e-field" data-name="StartTime"
+								format="M/dd/yy h:mm a" [value]="dateParser(data.startTime || data.StartTime)">
+							</ejs-datetimepicker>
+						</td>
+					</tr>
+					<tr>
+						<td class="e-textlabel">To</td>
+						<td colspan="4">
+							<ejs-datetimepicker id="EndTime" class="e-field" data-name="EndTime" format="M/dd/yy h:mm a"
+								[value]='dateParser(data.endTime || data.EndTime)'></ejs-datetimepicker>
+						</td>
+					</tr>
+					<tr>
+						<td class="e-textlabel">Reason</td>
+						<td colspan="4">
+							<textarea id="Description" class="e-field e-input" name="Description" rows="3" cols="50"
+                value="{{data.Description}}" style="width: 100%; height: 60px !important; resize: vertical"></textarea>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</ng-template>
+	</ejs-schedule>
+</div>
